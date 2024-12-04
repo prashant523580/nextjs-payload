@@ -13,6 +13,10 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
+import HeroSection from '@/components/HeroSection'
+import Category from '@/components/Category'
+import PopulerSection from '@/components/PopulerSection'
+import Feature from '@/components/Feature'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -65,12 +69,17 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page
 
   return (
-    <article className="pt-16 pb-24">
+    <article className="max-w-screen-xl mx-auto">
       <PageClient />
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
-      <RenderHero {...hero} />
+      {/* <RenderHero {...hero} /> */}
+      <HeroSection/>
+      <Category/>
+      <PopulerSection/>
+      <Feature/>
+      
       <RenderBlocks blocks={layout} />
     </article>
   )

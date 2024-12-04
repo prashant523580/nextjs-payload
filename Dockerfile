@@ -15,9 +15,9 @@ ENV NODE_ENV=production
 
 WORKDIR /home/node/app
 COPY package*.json  ./
-COPY yarn.lock ./
+# COPY package-lock.json ./
 
-RUN yarn install --production
+RUN npm install --production
 
 EXPOSE 3000
 

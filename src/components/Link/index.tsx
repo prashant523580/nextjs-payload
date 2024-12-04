@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import type { Page, Post } from '@/payload-types'
+import ActiveLink from '@/Header/Nav/ActiveLink'
 
 type CMSLinkType = {
   appearance?: 'inline' | ButtonProps['variant']
@@ -18,6 +19,7 @@ type CMSLinkType = {
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
   url?: string | null
+  onClick?: () => void
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
@@ -31,6 +33,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     reference,
     size: sizeFromProps,
     url,
+    onClick
   } = props
 
   const href =
@@ -48,19 +51,19 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   /* Ensure we don't break any styles set by richText */
   if (appearance === 'inline') {
     return (
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+      <ActiveLink onClick={onClick} label={label as string} className={cn(className)} href={href || url || ''} {...newTabProps}>
         {label && label}
         {children && children}
-      </Link>
+      </ActiveLink>
     )
   }
 
   return (
     <Button asChild className={className} size={size} variant={appearance}>
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+      <ActiveLink onClick={onClick} label={label as string} className={cn(className)} href={href || url || ''} {...newTabProps}>
         {label && label}
         {children && children}
-      </Link>
+      </ActiveLink>
     </Button>
   )
 }

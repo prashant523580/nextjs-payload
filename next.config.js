@@ -20,6 +20,10 @@ const nextConfig = {
       }),
     ],
   },
+  webpack: (config) => {
+      config.cache = false
+      return config
+  },
   reactStrictMode: true,
   redirects,
 }

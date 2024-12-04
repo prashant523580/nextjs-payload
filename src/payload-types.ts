@@ -16,6 +16,7 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    packages: Package;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -31,6 +32,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    packages: PackagesSelect<false> | PackagesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -349,6 +351,8 @@ export interface ArchiveBlock {
 export interface Category {
   id: string;
   title: string;
+  description?: string | null;
+  image?: (string | null) | Media;
   parent?: (string | null) | Category;
   breadcrumbs?:
     | {
@@ -614,6 +618,25 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "packages".
+ */
+export interface Package {
+  id: string;
+  title: 'Basic Package' | 'Standard Package' | 'Premium Package';
+  description?: string | null;
+  price: number;
+  features?:
+    | {
+        feature?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  category: string | Category;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -706,6 +729,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'packages';
+        value: string | Package;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1008,6 +1035,8 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
+  description?: T;
+  image?: T;
   parent?: T;
   breadcrumbs?:
     | T
@@ -1035,6 +1064,24 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "packages_select".
+ */
+export interface PackagesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  price?: T;
+  features?:
+    | T
+    | {
+        feature?: T;
+        id?: T;
+      };
+  category?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

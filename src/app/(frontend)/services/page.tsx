@@ -53,11 +53,11 @@ async function page() {
               <div className="">
 
               {
-                cate.children.map((child,indNum) =>(
-                  <div className="" key={indNum}>
-                    {child.title}
-                  </div>
-                ))
+                // cate.children.map((child,indNum) =>(
+                //   <div className="" key={indNum}>
+                //     {child.title}
+                //   </div>
+                // ))
               }
               </div>
               {/* <p className="text-gray-600">{cate.description}</p> */}
@@ -73,18 +73,18 @@ async function page() {
 
 
 
-const Categories = ({ categories }) => {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {categories.map((category) => (
-        <div key={category.id} className="p-4 border rounded shadow hover:shadow-lg">
-          <h2 className="text-xl font-bold">{category.title}</h2>
-          {/* <p className="text-gray-600">{category.description}</p> */}
-        </div>
-      ))}
-    </div>
-  );
-};
+// const Categories = ({ categories }) => {
+//   return (
+//     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+//       {categories.map((category) => (
+//         <div key={category.id} className="p-4 border rounded shadow hover:shadow-lg">
+//           <h2 className="text-xl font-bold">{category.title}</h2>
+//           {/* <p className="text-gray-600">{category.description}</p> */}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
 
 
 export default page

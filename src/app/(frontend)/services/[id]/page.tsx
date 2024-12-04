@@ -3,10 +3,16 @@ import configPromise from '@payload-config'
 
 import React from 'react'
 import Link from 'next/link';
+// import { PayloadRedirects } from '@/components/PayloadRedirects';
+type Args = {
+  params: Promise<{
+    slug?: string
+  }>
+}
 interface ParamsType {
-  params: {
-    id: string
-  }
+  params: Promise<{
+    id?: string
+  }>
 
 }
 async function page({ params }: ParamsType) {
@@ -23,6 +29,8 @@ async function page({ params }: ParamsType) {
 
     },
   })
+  // if (!category) return <PayloadRedirects url={"/"} />
+
   const packages = await payload.find({
     collection: "packages",
     where: {
@@ -52,13 +60,13 @@ async function page({ params }: ParamsType) {
               <p className="text-sm text-gray-800">Change your plant according your needs</p>
             </div>
 
-            <div className="flex mx-auto mt-12 bg-white rounded-full w-max">
+            {/* <div className="flex mx-auto mt-12 bg-white rounded-full w-max">
               <button className="text-white font-semibold tracking-wide w-full text-sm bg-orange-500 py-2.5 px-5 rounded-full">
                 Monthly</button>
               <button
                 className="text-gray-800 font-semibold tracking-wide w-full text-sm py-2.5 px-4 rounded-full">
                 Yearly</button>
-            </div>
+            </div> */}
 
             <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-8 max-md:max-w-sm max-md:mx-auto">
               {
@@ -104,26 +112,26 @@ async function page({ params }: ParamsType) {
 }
 
 
-const Packages = ({ packages }) => {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {packages.map((pkg) => (
-        <div key={pkg.id} className="p-4 border rounded shadow hover:shadow-lg">
-          <h3 className="text-lg font-semibold">{pkg.name}</h3>
-          <p className="text-gray-500">{pkg.description}</p>
-          <div className="mt-2">
-            <ul className="list-disc list-inside">
-              {pkg.features.map((feature, index) => (
-                <li key={index} className="text-sm">{feature}</li>
-              ))}
-            </ul>
-          </div>
-          <p className="mt-4 text-lg font-bold text-green-600">${pkg.price}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+// const Packages = ({ packages }) => {
+//   return (
+//     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+//       {packages.map((pkg) => (
+//         <div key={pkg.id} className="p-4 border rounded shadow hover:shadow-lg">
+//           <h3 className="text-lg font-semibold">{pkg.name}</h3>
+//           <p className="text-gray-500">{pkg.description}</p>
+//           <div className="mt-2">
+//             <ul className="list-disc list-inside">
+//               {pkg.features.map((feature, index) => (
+//                 <li key={index} className="text-sm">{feature}</li>
+//               ))}
+//             </ul>
+//           </div>
+//           <p className="mt-4 text-lg font-bold text-green-600">${pkg.price}</p>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
 
 
 
